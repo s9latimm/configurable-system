@@ -10,9 +10,8 @@ void sleep(int milliseconds) {
 #define FEATURE(name)                                                          \
   void f_##name() __attribute__((xray_always_instrument));                     \
   void f_##name() {                                                            \
-    std::cout << #name << " ENTER" << std::endl;                               \
-    sleep(100);                                                                \
-    std::cout << #name << " EXIT" << std::endl;                                \
+    std::cout << #name << std::endl;                                           \
+    sleep(10);                                                                 \
   }
 #include "Features.def"
 
