@@ -2,10 +2,16 @@
 #include <iostream>
 #include <thread>
 
+void sleep(int) __attribute__((xray_never_instrument));
+void sleep(int milliseconds) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
+
 #define FEATURE(name)                                                          \
+  void f_##name() __attribute__((xray_always_instrument));                     \
   void f_##name() {                                                            \
     std::cout << #name << " ENTER" << std::endl;                               \
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));               \
+    sleep(100);                                                                \
     std::cout << #name << " EXIT" << std::endl;                                \
   }
 #include "Features.def"
