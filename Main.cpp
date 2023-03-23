@@ -9,10 +9,7 @@ void sleep(int milliseconds) {
 
 #define FEATURE(name, iter)                                                    \
   void f_##name() __attribute__((xray_always_instrument));                     \
-  void f_##name() {                                                            \
-    std::cout << #name << std::endl;                                           \
-    sleep(10);                                                                 \
-  }
+  void f_##name() { sleep(10); }
 #include "Features.def"
 
 int main(int argc, char *argv[]) {

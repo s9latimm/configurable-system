@@ -2,7 +2,7 @@
 #define FEATURE(name, iter)
 #endif
 
-FEATURE(Foo, 10000)
-FEATURE(Bar, 10000)
+FEATURE(Foo, 5000)
+FEATURE(Bar, 5000)
 
 #undef FEATURE
