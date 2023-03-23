@@ -7,7 +7,7 @@ void sleep(int milliseconds) {
   std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
 }
 
-#define FEATURE(name)                                                          \
+#define FEATURE(name, iter)                                                    \
   void f_##name() __attribute__((xray_always_instrument));                     \
   void f_##name() {                                                            \
     std::cout << #name << std::endl;                                           \
@@ -17,10 +17,12 @@ void sleep(int milliseconds) {
 
 int main(int argc, char *argv[]) {
 
-#define FEATURE(name)                                                          \
+#define FEATURE(name, iter)                                                    \
   bool F_##name __attribute__((feature_variable(#name))) = argc > 0;           \
-  if (F_##name) {                                                              \
-    f_##name();                                                                \
+  for (unsigned Iter = 0; Iter < iter; ++Iter) {                               \
+    if (F_##name) {                                                            \
+      f_##name();                                                              \
+    }                                                                          \
   }
 #include "Features.def"
 
