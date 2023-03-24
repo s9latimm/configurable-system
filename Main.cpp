@@ -1,9 +1,11 @@
-#include <chrono>
-#include <thread>
+#include <time.h>
 
 void sleep(int) __attribute__((xray_never_instrument));
-void sleep(int milliseconds) {
-  std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+void sleep(long milliseconds) {
+  struct timespec Rem;
+  struct timespec Req = {(int)(milliseconds / 1000),
+                         (milliseconds % 1000) * 1000000};
+  nanosleep(&Req, &Rem);
 }
 
 #define FEATURE(name, iter)                                                    \
