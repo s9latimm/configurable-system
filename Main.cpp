@@ -1,7 +1,7 @@
 #include <time.h>
 
 void sleep(int) __attribute__((xray_never_instrument));
-void sleep(long milliseconds) {
+void sleep(int milliseconds) {
   struct timespec Rem;
   struct timespec Req = {(int)(milliseconds / 1000),
                          (milliseconds % 1000) * 1000000};
