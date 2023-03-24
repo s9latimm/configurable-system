@@ -1,9 +1,14 @@
+#include <chrono>
+#include <thread>
+
 void sleep(int) __attribute__((xray_never_instrument));
-void sleep() {}
+void sleep(int milliseconds) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
 
 #define FEATURE(name, iter)                                                    \
   void f_##name() __attribute__((xray_always_instrument));                     \
-  void f_##name() { sleep(); }
+  void f_##name() { sleep(1); }
 #include "Features.def"
 
 int main(int argc, char *argv[]) {
