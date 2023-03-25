@@ -6,7 +6,7 @@
 #define WORKLOAD 1
 #endif
 
-FEATURE(Foo, 100'000, collatz)
+FEATURE(Foo, 100'000, busy)
 
 #undef FEATURE
 #undef WORKLOAD
