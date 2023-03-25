@@ -36,7 +36,11 @@ struct Workload {
         }
         Values[Index] = Value;
       }
-      std::reverse(Values.begin(), Values.end());
+      std::vector<unsigned> Copy;
+      for (unsigned Index = Values.size(); Index > 0; --Index) {
+        Copy.push_back(Values[Index - 1]);
+      }
+      Values = Copy;
       asm volatile("nop");
     }
   }
