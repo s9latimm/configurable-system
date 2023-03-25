@@ -1,8 +1,12 @@
 #ifndef FEATURE
-#define FEATURE(name, iter)
+#define FEATURE(name, iter, workload)
 #endif
 
-FEATURE(Foo, 50000)
-FEATURE(Bar, 50000)
+#ifndef WORKLOAD
+#define WORKLOAD 1
+#endif
+
+FEATURE(Foo, 100'000, collatz)
 
 #undef FEATURE
+#undef WORKLOAD
