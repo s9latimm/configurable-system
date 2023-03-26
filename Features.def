@@ -6,7 +6,7 @@
 #define WORKLOAD 1
 #endif
 
-FEATURE(Foo, 100'000, sort)
+FEATURE(Foo, 100'000, sleep)
 
 #undef FEATURE
 #undef WORKLOAD
