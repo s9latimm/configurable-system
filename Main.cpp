@@ -78,11 +78,13 @@ int main(int argc, char *argv[]) {
   std::cout << "FEATURE(" << #name << ", " << #iter << ", " << #workload       \
             << ")" << std::endl;                                               \
   for (unsigned Iter = 0; Iter < iter; ++Iter) {                               \
+    Workload::run(0, &Workload::workload);                                     \
     if (F_##name) {                                                            \
-      Workload::run(WORKLOAD, &Workload::workload);                            \
+      Workload::run(0, &Workload::workload);                                   \
       f_##name();                                                              \
-      Workload::run(WORKLOAD, &Workload::workload);                            \
+      Workload::run(0, &Workload::workload);                                   \
     }                                                                          \
+    Workload::run(0, &Workload::workload);                                     \
   }
 #include "Features.def"
 
