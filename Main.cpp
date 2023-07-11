@@ -79,7 +79,9 @@ int main(int argc, char *argv[]) {
             << ")" << std::endl;                                               \
   for (unsigned Iter = 0; Iter < iter; ++Iter) {                               \
     if (F_##name) {                                                            \
+      Workload::run(WORKLOAD, &Workload::workload);                            \
       f_##name();                                                              \
+      Workload::run(WORKLOAD, &Workload::workload);                            \
     }                                                                          \
   }
 #include "Features.def"
